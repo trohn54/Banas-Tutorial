@@ -1,0 +1,11 @@
+C:\Programming\C#\BanasTutorial\BanasTutorial\bin\Debug\netcoreapp3.0\BanasTutorial.exe
+C:\Programming\C#\BanasTutorial\BanasTutorial\bin\Debug\netcoreapp3.0\BanasTutorial.deps.json
+C:\Programming\C#\BanasTutorial\BanasTutorial\bin\Debug\netcoreapp3.0\BanasTutorial.runtimeconfig.json
+C:\Programming\C#\BanasTutorial\BanasTutorial\bin\Debug\netcoreapp3.0\BanasTutorial.runtimeconfig.dev.json
+C:\Programming\C#\BanasTutorial\BanasTutorial\bin\Debug\netcoreapp3.0\BanasTutorial.dll
+C:\Programming\C#\BanasTutorial\BanasTutorial\bin\Debug\netcoreapp3.0\BanasTutorial.pdb
+C:\Programming\C#\BanasTutorial\BanasTutorial\obj\Debug\netcoreapp3.0\BanasTutorial.csprojAssemblyReference.cache
+C:\Programming\C#\BanasTutorial\BanasTutorial\obj\Debug\netcoreapp3.0\BanasTutorial.AssemblyInfoInputs.cache
+C:\Programming\C#\BanasTutorial\BanasTutorial\obj\Debug\netcoreapp3.0\BanasTutorial.AssemblyInfo.cs
+C:\Programming\C#\BanasTutorial\BanasTutorial\obj\Debug\netcoreapp3.0\BanasTutorial.dll
+C:\Programming\C#\BanasTutorial\BanasTutorial\obj\Debug\netcoreapp3.0\BanasTutorial.pdb

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BanasTutorial", "BanasTutorial\BanasTutorial.csproj", "{FA25835B-0CAA-4233-91B7-0B956C9B0673}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA25835B-0CAA-4233-91B7-0B956C9B0673}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA25835B-0CAA-4233-91B7-0B956C9B0673}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA25835B-0CAA-4233-91B7-0B956C9B0673}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA25835B-0CAA-4233-91B7-0B956C9B0673}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D93A9DEA-76A5-4D7D-BEC8-039D073C8926}
+	EndGlobalSection
+EndGlobal
