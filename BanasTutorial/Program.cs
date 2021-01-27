@@ -4,12 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+using System.Globalization;
 
 namespace BanasTutorial
 {
     class Program
     {
         static void Main(string[] args)
+        {
+            Part2(args);
+        }
+        private static void SayHello() //"Keep functions to about 10 lines of code per function
+        {
+            string name = "";
+            Console.Write("What is your name? ");
+            name = Console.ReadLine();
+            Console.WriteLine("Hello, {0}!", name);
+        }
+        private static void Part1(string[] args)
         {
             //Console.WriteLine("Hello World!");
 
@@ -21,7 +33,7 @@ namespace BanasTutorial
             //}
 
             //string[] myArgs = Environment.GetCommandLineArgs();  //The other way to acheive the same thing: "Probably never gonna do this"
-            //Console.WriteLine(string.Join(", ", myArgs));
+            //Console.WriteLine(string.Join(", ", myArgs)); //does what you think it does
 
             //SayHello();
 
@@ -77,11 +89,11 @@ namespace BanasTutorial
             Console.WriteLine("String length: {0}", randString.Length);
             Console.WriteLine("String has is: {0}", randString.Contains("is"));
             Console.WriteLine("Index of is: {0}", randString.IndexOf("is"));
-            Console.WriteLine("Remove String: {0}", randString.Remove(0,6));
+            Console.WriteLine("Remove String: {0}", randString.Remove(0, 6));
             Console.WriteLine("Insert: {0}", randString.Insert(10, "short"));
             Console.WriteLine("Replace: {0}", randString.Replace("string", "sentence"));
-            Console.WriteLine("Compare A to B: {0}", String.Compare("A","B", StringComparison.OrdinalIgnoreCase)); //check alphabetical order
-            Console.WriteLine("A = a : {0}", String.Equals("A","a", StringComparison.OrdinalIgnoreCase));
+            Console.WriteLine("Compare A to B: {0}", String.Compare("A", "B", StringComparison.OrdinalIgnoreCase)); //check alphabetical order
+            Console.WriteLine("A = a : {0}", String.Equals("A", "a", StringComparison.OrdinalIgnoreCase));
             Console.WriteLine("Pad left : {0}", randString.PadLeft(20, '.'));
             Console.WriteLine("Pad right : {0}", randString.PadRight(20, '.'));
             Console.WriteLine("Trim : {0}", randString.Trim());
@@ -93,14 +105,107 @@ namespace BanasTutorial
             //put a \ if you want a double quote: \" or \'. backslash is \
             Console.WriteLine(@"no matter how many ' things I put in, it won't matter ");
         }
-
-        //"Keep functions to about 10 lines of code per function
-        private static void SayHello()
+        
+        private static void Part2(string[] args)
         {
-            string name = "";
-            Console.Write("What is your name? ");
-            name = Console.ReadLine();
-            Console.WriteLine("Hello, {0}!", name);
+            //implicit typing
+            var intVal = 4; //c# knows this is an int. bad practice though
+            Console.WriteLine(intVal.GetType());
+
+            //arrays
+            int[] favNums = new int[3]; //max size 3
+            favNums[0] = 23;
+            Console.WriteLine("Favorite num 0: {0}", favNums[0]);
+
+            string[] customers = { "bob", "jake" };
+            var employees = new[] { "mike", "PAUL" }; 
+            object[] randomArray = { 0, "Kelp" };     //array of any object
+            Console.WriteLine("Random array 0: {0}", randomArray[0]);
+
+            Console.WriteLine("Array size: {0}", randomArray.Length);
+            for (int i = 0; i < randomArray.Length; i++)
+            {
+                Console.WriteLine("Array {0}: {1}", i, randomArray[i]);
+            }
+
+            //multidimensional
+            string[,] custNames = new string[2, 2] { { "Bob", "Bob" }, { "Bob", "Bob" } };
+            Console.WriteLine("customer name: {0}", custNames.GetValue(1,1));
+
+            for (int i = 0; i < custNames.GetLength(0); i++)
+            {
+                for (int j = 0; j < custNames.GetLength(1); j++)
+                {
+                    Console.Write(custNames[i,j]);
+                }
+                Console.WriteLine();
+            }
+
+            int[] randNums = { 1, 4, 6, 8 };
+            PrintArray(randNums, "Foreach");
+            Array.Sort(randNums);
+            Array.Reverse(randNums);
+            Console.WriteLine(Array.IndexOf(randNums, 0));
+            randNums.SetValue(0, 1);
+
+            int[] srcArray = { 1, 2, 3 };
+            int[] destArray = new int[2];
+            int startIndex = 0;
+            int length = 2;
+            Array.Copy(srcArray, startIndex, destArray, startIndex, length);
+
+            Array anothArray = Array.CreateInstance(typeof(int), 10);
+            srcArray.CopyTo(anothArray, 5);
+
+            foreach(int m in anothArray)
+            {
+                Console.WriteLine("Copy to: {0}", m);
+            }
+
+            int[] numArray = { 1, 11, 22 };
+            Console.WriteLine(">10: {0}", Array.Find(numArray, GT10)); //array.find gives the first match. findall gives all matches, findindex will give the index of the first match.
+
+
+            //String Builders
+            //any time you change a string, you make a new string
+            //if you use a string builder, though, you actually change the string
+            StringBuilder sb = new StringBuilder("Random Text");
+            StringBuilder sb2 = new StringBuilder("More stuff is important", 256);
+
+            Console.WriteLine("capacity: {0}", sb.Capacity);
+            Console.WriteLine("capacity: {0}", sb2.Capacity);
+            Console.WriteLine("length: {0}", sb2.Length);
+            sb2.AppendLine("\nmore imprtant shit");
+            CultureInfo enUS = CultureInfo.CreateSpecificCulture("en-US"); //need system.globalization for this part
+            string bestCustomer = "bob";
+            sb2.AppendFormat(enUS, "best Customer: {0}", bestCustomer);
+            Console.WriteLine(sb2.ToString());
+            sb2.Replace("text", "characters");
+            Console.WriteLine(sb2.ToString());
+
+            sb2.Clear();
+            sb2.Append("random text");
+            Console.WriteLine(sb.Equals(sb2));
+            sb2.Insert(11, "thats great");
+            Console.WriteLine(sb2.ToString());
+            sb2.Remove(11, 7); //remove 7 characters starting at character 11
+
+            //casting(fancy word for converting)
+            long num1 = 1234;
+            int num2 = (int)num1;
+        }
+        
+        static void PrintArray(int[] intArray, string mess)
+        {
+            foreach (int k in intArray)
+            {
+                Console.WriteLine("{0}: {1}", mess, k);
+            }
+        }
+
+        private static bool GT10(int val)
+        {
+            return val > 10;
         }
     }
 }
