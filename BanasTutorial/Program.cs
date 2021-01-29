@@ -12,7 +12,7 @@ namespace BanasTutorial
     {
         static void Main(string[] args)
         {
-            Part2(args);
+            Part3(args);
         }
         private static void SayHello() //"Keep functions to about 10 lines of code per function
         {
@@ -105,7 +105,19 @@ namespace BanasTutorial
             //put a \ if you want a double quote: \" or \'. backslash is \
             Console.WriteLine(@"no matter how many ' things I put in, it won't matter ");
         }
-        
+
+
+        static void PrintArray(int[] intArray, string mess)
+        {
+            foreach (int k in intArray)
+            {
+                Console.WriteLine("{0}: {1}", mess, k);
+            }
+        }
+        private static bool GT10(int val)
+        {
+            return val > 10;
+        }
         private static void Part2(string[] args)
         {
             //implicit typing
@@ -118,7 +130,7 @@ namespace BanasTutorial
             Console.WriteLine("Favorite num 0: {0}", favNums[0]);
 
             string[] customers = { "bob", "jake" };
-            var employees = new[] { "mike", "PAUL" }; 
+            var employees = new[] { "mike", "PAUL" };
             object[] randomArray = { 0, "Kelp" };     //array of any object
             Console.WriteLine("Random array 0: {0}", randomArray[0]);
 
@@ -130,13 +142,13 @@ namespace BanasTutorial
 
             //multidimensional
             string[,] custNames = new string[2, 2] { { "Bob", "Bob" }, { "Bob", "Bob" } };
-            Console.WriteLine("customer name: {0}", custNames.GetValue(1,1));
+            Console.WriteLine("customer name: {0}", custNames.GetValue(1, 1));
 
             for (int i = 0; i < custNames.GetLength(0); i++)
             {
                 for (int j = 0; j < custNames.GetLength(1); j++)
                 {
-                    Console.Write(custNames[i,j]);
+                    Console.Write(custNames[i, j]);
                 }
                 Console.WriteLine();
             }
@@ -157,7 +169,7 @@ namespace BanasTutorial
             Array anothArray = Array.CreateInstance(typeof(int), 10);
             srcArray.CopyTo(anothArray, 5);
 
-            foreach(int m in anothArray)
+            foreach (int m in anothArray)
             {
                 Console.WriteLine("Copy to: {0}", m);
             }
@@ -194,18 +206,133 @@ namespace BanasTutorial
             long num1 = 1234;
             int num2 = (int)num1;
         }
-        
-        static void PrintArray(int[] intArray, string mess)
+
+
+        private static void Part3(string[] args)
         {
-            foreach (int k in intArray)
+            //Relation Operations: < > >= <= == !=
+            //Logical Operations: && || ! 
+            int age = 17;
+            if ((age >= 5) && (age <= 7))
             {
-                Console.WriteLine("{0}: {1}", mess, k);
+                Console.WriteLine("elementary school");
             }
+            else if ((age >= 7) && (age <= 13))
+            {
+                Console.WriteLine("middle school");
+            }
+            else if ((age >= 13) && (age <= 19))
+            {
+                Console.WriteLine("high school");
+            }
+            else
+            {
+                Console.WriteLine("go to college");
+            }
+
+            if ((age < 14) || (age < 19))
+            {
+                Console.WriteLine("you shouldn't work");
+            }
+
+            bool canDrive = age >= 16 ? true : false;
+
+            switch (age) //in other languages, you can use ranges in switch statements. in C#, you need to stack.
+            {
+                case 1:
+                case 2:
+                    Console.WriteLine("go to daycare");
+                    break;
+                case 3:
+                case 4:
+                    Console.WriteLine("go to preschool");
+                    break;
+
+                case 5:
+                    Console.WriteLine("go to kindergarten.");
+                    break;
+                default:
+                    Console.WriteLine("Go to another school");
+                    //goto OtherSchool; //evil und verboten
+                    break;
+            }
+
+            //OtherSchool:
+            //    Console.WriteLine("aaaaaah where am i");
+
+            //    string name = "Derek";
+            //    string name2 = "Derek";
+
+            //    if (name.Equals(name2, StringComparison.Ordinal)) //
+            //    {
+            //        Console.WriteLine("same names");
+            //    }
+            //}
+
+            int i = 1;
+
+            while (i <= 10)
+            {
+                if (i % 2 == 0)
+                {
+                    i++;
+                    continue;
+                }
+
+                if (i == 9)
+                {
+                    break;
+                    
+                }
+                i++;
+            }
+
+            Random rnd = new Random();
+            int secretNumber = rnd.Next(1, 11);
+            int numberGuessed = 0;
+            do
+            {
+                Console.Write("pick a # between 1 and 10: ");
+                numberGuessed = Convert.ToInt32(Console.ReadLine());
+            } while (secretNumber != numberGuessed);
+
+            //other convert options: ToBoolean, ToByte, ToChar, ToDecimal, ToDouble, ToInt64, ToString
+            //They can convert from any type into any other type
+
+            //ExceptionHandling
+            double num1 = 5;
+            double num2 = 0;
+
+            try
+            {
+                Console.WriteLine("5/0= {0}", DoDivision(num1,num2));
+            }
+            catch (DivideByZeroException ex) //if u just type "exception" instead of "divide by zero exception", you'll catch everything.
+            {
+                Console.WriteLine("You cant do that");
+                Console.WriteLine(ex.GetType().Name);
+                Console.WriteLine(ex.Message);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("an error occured");
+                Console.WriteLine(ex.GetType().Name);
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Cleaning Up");
+            }
+
         }
 
-        private static bool GT10(int val)
+        static double DoDivision(double x, double y)
         {
-            return val > 10;
+            if(y == 0)
+            {
+                throw new System.DivideByZeroException();
+            }
+            return x / y;
         }
     }
 }
