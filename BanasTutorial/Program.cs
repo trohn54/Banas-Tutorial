@@ -12,8 +12,9 @@ namespace BanasTutorial
     {
         static void Main(string[] args)
         {
-            Part3(args);
+            Part4(args);
         }
+
         private static void SayHello() //"Keep functions to about 10 lines of code per function
         {
             string name = "";
@@ -282,7 +283,7 @@ namespace BanasTutorial
                 if (i == 9)
                 {
                     break;
-                    
+
                 }
                 i++;
             }
@@ -305,7 +306,7 @@ namespace BanasTutorial
 
             try
             {
-                Console.WriteLine("5/0= {0}", DoDivision(num1,num2));
+                Console.WriteLine("5/0= {0}", DoDivision(num1, num2));
             }
             catch (DivideByZeroException ex) //if u just type "exception" instead of "divide by zero exception", you'll catch everything.
             {
@@ -313,7 +314,7 @@ namespace BanasTutorial
                 Console.WriteLine(ex.GetType().Name);
                 Console.WriteLine(ex.Message);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("an error occured");
                 Console.WriteLine(ex.GetType().Name);
@@ -325,14 +326,99 @@ namespace BanasTutorial
             }
 
         }
-
         static double DoDivision(double x, double y)
         {
-            if(y == 0)
+            if (y == 0)
             {
                 throw new System.DivideByZeroException();
             }
             return x / y;
         }
+
+
+        private static void Part4(string[] args)
+        {
+            double x = 5;
+            double y = 4;
+
+            Console.WriteLine("5+5 = {0}", GetSum(x, y));
+            Console.WriteLine(); //proves x didn't change in the function, and was passed by value
+
+            int solution;
+
+            DoubleIt(15, out solution); //works with values putside the method itself, and defines the value of a variable inside the method
+
+            Console.WriteLine("15*2 = {0}", solution);
+
+            int num1 = 10;
+            int num2 = 20;
+
+            Console.WriteLine("Before swap num1: {0} num2: {1}", num1, num2);
+            Swap(ref num1, ref num2);
+            Console.WriteLine("After swap num1: {0} num2: {1}", num1, num2);
+
+            Console.WriteLine("1+2+3 = {0}", GetSumMore(1, 2, 3));
+
+            //named parameters
+            PrintInfo(zipCode: 60053, name: "Tommy");
+
+            //overloads
+            Console.WriteLine("5.0 + 4.5 = {0}", GetSum(5.0, 4.5));
+            Console.WriteLine("5+4 = {0}", GetSum(5, 4));
+            Console.WriteLine("5+4 = {0}", GetSum("5", "4")); //parameters have to be different to have an overloaded method
+
+            //enums
+            carColor cc = carColor.Blue;
+            PaintCar(cc);
+        }
+        static void DoubleIt(int x, out int solution)
+        {
+            solution = x * 2;
+        }
+        static double GetSum(double x = 1, double y = 1)
+        {
+            //double temp = x;
+            //x = y;
+            //y = temp;
+            return x + y;
+        }
+        static double GetSum(string x = "x", string y = "1")
+        {
+            double dblX = Convert.ToDouble(x);
+            double dblY = Convert.ToDouble(y);
+            return dblX + dblY;
+        }
+        public static void Swap(ref int num1, ref int num2)
+        {
+            int temp = num1;
+            num1 = num2;
+            num2 = temp;
+        }
+        static double GetSumMore(params double[] nums)
+        {
+            double sum = 0;
+            foreach (int i in nums)
+            {
+                sum += i;
+            }
+            return sum;
+        }
+        static void PrintInfo(string name, int zipCode)
+        {
+            Console.WriteLine("{0} lives in the zip code {1}", name, zipCode);
+        }
+        enum carColor : byte
+        {
+            Orange = 1,
+            Blue,
+            Green,
+            Red,
+            Yellow
+        }
+        static void PaintCar(carColor carColor)
+        {
+            Console.WriteLine("The car was painted {0} with the code {1}", carColor, (int)carColor);
+        }
+
     }
 }
