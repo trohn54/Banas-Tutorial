@@ -12,7 +12,7 @@ namespace BanasTutorial
     {
         static void Main(string[] args)
         {
-            Part4(args);
+            Part5(args);
         }
 
         private static void SayHello() //"Keep functions to about 10 lines of code per function
@@ -418,6 +418,57 @@ namespace BanasTutorial
         static void PaintCar(carColor carColor)
         {
             Console.WriteLine("The car was painted {0} with the code {1}", carColor, (int)carColor);
+        }
+
+        
+        private static void Part5(string[] args)
+        {
+
+            //Structs
+            Rectangle rect1;
+            rect1.length = 200;
+            rect1.width = 50;
+            Console.WriteLine("Area of rect1: {0}", rect1.Area());
+            Rectangle rect2 = new Rectangle(75, 100);
+            rect2 = rect1;
+            rect1.length = 33;  //proves its not a reference, but a value
+            Console.WriteLine("rect2.length: {0}", rect2.length);
+
+            //OOP classes are structs that can be inherited from
+            Animal Fox = new Animal() { sound = "papapapapapow", name = "Fox" };
+            Console.WriteLine("# of animals: {0}", Animal.GetNumAnimals());
+            Fox.MakeSound();
+
+            //Static Classes
+            Console.WriteLine("Area of Rectangle: {0}", ShapeMath.GetArea("rectangle", 5,6));
+
+            //nullable types
+            int? randNum = null;
+            if(randNum == null)
+            {
+                Console.WriteLine("randNum is Null");
+            }
+            if(!randNum.HasValue)
+            {
+                Console.WriteLine("randNum is Null");
+            }
+
+        }
+        struct Rectangle
+        {
+            public double length;
+            public double width;
+
+            public Rectangle(double l = 1, double w = 1)
+            {
+                length = l;
+                width = w;
+            }
+
+            public double Area()
+            {
+                return length * width;
+            }
         }
 
     }
