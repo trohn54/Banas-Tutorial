@@ -6,6 +6,7 @@ using System.Linq;
 //Used for part 5
 namespace BanasTutorial
 {
+    //calling this "sealed" will keep it from inheriting
     class Animal
     {
         ////PART 5
@@ -45,60 +46,127 @@ namespace BanasTutorial
         //    return numOfAnimals;
         //}
 
+        ////PART 6
+        ////protected: can be accessed by subclasses
+        ////public:user can change things
+        ////private: just the methods in the field
+        //private string name;
+        //private string sound;
+
+        //public const string SHELTER = "Tommys animal hut"; //can't be changed anywhere
+
+        ////readonlys are consts that can be defined at runtime
+        //public readonly int idNum;
+
+        //public void MakeSound()
+        //{
+        //    Console.WriteLine("{0} says {1}", name, sound);
+        //}
+
+        ////different way to do constructors
+        //public Animal() : this("No Sound", "No Sound") { }
+
+        //public Animal(string name) : this(name, "No Sound") { }
+
+        //public Animal(string name, string sound)
+        //{
+        //    SetName(name);
+        //    Sound = sound;
+
+        //    NumOfAnimals = 1;
+
+        //    Random rnd = new Random();
+        //    idNum = rnd.Next(1, 1234234);
+        //}
+
+        ////setter/mutators protect fields from recieving bad data
+        //public void SetName(string name)
+        //{
+        //    if (!name.Any(char.IsDigit)) // .Any is a LINQ thing. this checks if what was passed in is a number
+        //    {
+        //        this.name = name;
+        //    }
+        //    else
+        //    {
+        //        this.name = "No Name";
+        //        Console.WriteLine("Name can't contain numbers.");
+        //    }
+        //}
+
+        ////getter/ accessor provides output aside from the value that is stored
+        //public string GetName()
+        //{
+        //    return name;
+        //}
+
+        ////how these are usually done
+        //public string Sound
+        //{
+        //    get { return sound; }
+        //    set
+        //    {
+        //        if (value.Length > 10)
+        //        {
+        //            sound = "No Sound";
+        //            Console.WriteLine("Sound is too long");
+        //        }
+        //        sound = value;
+        //    }
+        //}
+
+        //public string Owner { get; set; } = "No Owner";
+        //public static int numOfAnimals = 0;
+        //public static int NumOfAnimals
+        //{
+        //    get { return numOfAnimals; }
+        //    set { numOfAnimals += value; }
+        //}
+
         //PART 6
-        //protected: can be accessed by subclasses
-        //public:user can change things
-        //private: just the methods in the field
         private string name;
-        private string sound;
+        protected string sound;
 
-        public const string SHELTER = "Tommys animal hut"; //can't be changed anywhere
-
-        //readonlys are consts that can be defined at runtime
-        public readonly int idNum;
-
-        public void MakeSound()
+        protected AnimalIDInfo animalIDInfo = new AnimalIDInfo();
+        public void SetAnimalIDInfo(int idNum, string owner)
         {
-            Console.WriteLine("{0} says {1}", name, sound);
+            animalIDInfo.IDNum = idNum;
+            animalIDInfo.Owner = owner;
         }
 
-        //different way to do constructors
-        public Animal() : this("No Sound", "No Sound") { }
+        public void GetAnimalIDInfo()
+        {
+            Console.WriteLine($"{Name} has the ID of {animalIDInfo.IDNum} and is owned by {animalIDInfo.Owner}");
+        }
 
-        public Animal(string name) : this(name, "No Sound") { }
+        public virtual void MakeSound()
+        {
+            Console.WriteLine($"{Name} says {Sound}");
+        }
+
+        public Animal()
+            : this("No Name", "No Sound") { }
+
+        public Animal(string name)
+            : this(name, "No Sound") { }
 
         public Animal(string name, string sound)
         {
-            SetName(name);
+            Name = name;
             Sound = sound;
-
-            NumOfAnimals = 1;
-
-            Random rnd = new Random();
-            idNum = rnd.Next(1, 1234234);
         }
 
-        //setter/mutators protect fields from recieving bad data
-        public void SetName(string name)
+        public string Name
         {
-            if (!name.Any(char.IsDigit)) // .Any is a LINQ thing. this checks if what was passed in is a number
+            get { return name; }
+            set
             {
-                this.name = name;
-            }
-            else
-            {
-                this.name = "No Name";
-                Console.WriteLine("Name can't contain numbers.");
+                if (!value.Any(char.IsDigit))
+                {
+                    name = "No Name";
+                }
+                name = value;
             }
         }
-
-        //getter/ accessor provides output aside from the value that is stored
-        public string GetName()
-        {
-            return name;
-        }
-
-        //how these are usually done
         public string Sound
         {
             get { return sound; }
@@ -107,18 +175,26 @@ namespace BanasTutorial
                 if (value.Length > 10)
                 {
                     sound = "No Sound";
-                    Console.WriteLine("Sound is too long");
                 }
                 sound = value;
             }
         }
 
-        public string Owner { get; set; } = "No Owner";
-        public static int numOfAnimals = 0;
-        public static int NumOfAnimals
+        public class AnimalHealth
         {
-            get { return numOfAnimals; }
-            set { numOfAnimals += value; }
+            public bool HealthyWeight(double height, double weight)
+            {
+                double calc = height / weight;
+
+                if((calc >= .18) &&(calc <= .27))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
         }
 
     }

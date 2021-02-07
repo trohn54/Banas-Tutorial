@@ -8,11 +8,12 @@ using System.Globalization;
 
 namespace BanasTutorial
 {
+
     class Program
     {
         static void Main(string[] args)
         {
-            Part6(args);
+            Part7(args);
         }
 
         private static void SayHello() //"Keep functions to about 10 lines of code per function
@@ -420,7 +421,7 @@ namespace BanasTutorial
             Console.WriteLine("The car was painted {0} with the code {1}", carColor, (int)carColor);
         }
 
-        
+
         private static void Part5(string[] args)
         {
 
@@ -474,20 +475,68 @@ namespace BanasTutorial
 
         private static void Part6(string[] args)
         {
-            Animal cat = new Animal();
+            //Animal cat = new Animal();
 
-            cat.SetName("Whiskers");
-            cat.Sound = "Meow";
+            //cat.SetName("Whiskers");
+            //cat.Sound = "Meow";
 
-            Console.WriteLine("the cat is named {0} and says {1}", cat.GetName(), cat.Sound);
+            //Console.WriteLine("the cat is named {0} and says {1}", cat.GetName(), cat.Sound);
 
-            cat.Owner = "Derek";
-            Console.WriteLine("{0} owner is {1}", cat.GetName(), cat.Owner);
-            Console.WriteLine("{0} shelter id is {1}", cat.GetName(), cat.idNum);
+            //cat.Owner = "Derek";
+            //Console.WriteLine("{0} owner is {1}", cat.GetName(), cat.Owner);
+            //Console.WriteLine("{0} shelter id is {1}", cat.GetName(), cat.idNum);
 
-            Animal fox = new Animal("Oscar", "Papapapapapow");
+            //Animal fox = new Animal("Oscar", "Papapapapapow");
 
-            Console.WriteLine("# of animals : {0}", Animal.numOfAnimals);
-        }
+            //Console.WriteLine("# of animals : {0}", Animal.numOfAnimals);
+        } //Continued in Animal
+
+
+        private static void Part7(string[] args)
+        {
+            Animal whiskers = new Animal()
+            {
+                Name = "Whiskers",
+                Sound = "Prrrr"
+            };
+            Dog snickers = new Dog()
+            {
+                Name = "Snickers",
+                Sound = "grrr",
+                Sound2 = "Aroooo"
+            };
+
+            snickers.Sound = "Woof";
+            whiskers.MakeSound();
+            snickers.MakeSound();
+
+            whiskers.SetAnimalIDInfo(12345, "Bobby Brown");
+            snickers.SetAnimalIDInfo(545454, "Tommy Rohn");
+
+            whiskers.GetAnimalIDInfo();
+            snickers.GetAnimalIDInfo();
+
+            Animal.AnimalHealth getHealth = new Animal.AnimalHealth();
+
+            Console.WriteLine("My animal is healthy: {0}", getHealth.HealthyWeight(11, 46));
+            Console.WriteLine("My animal is healthy: {0}", getHealth.HealthyWeight(11, 146));
+
+            Animal monke = new Animal()
+            {
+                Name = "happy",
+                Sound = "eee"
+            };
+
+            Animal spot = new Dog()
+            {
+                Name = "Spot",
+                Sound = "ruf",
+                Sound2 = "grrr"
+            };
+
+            monke.MakeSound();
+            spot.MakeSound(); //
+            
+        } //Continued in Animal and Dog
     }
 }
