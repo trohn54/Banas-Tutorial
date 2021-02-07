@@ -12,7 +12,7 @@ namespace BanasTutorial
     {
         static void Main(string[] args)
         {
-            Part5(args);
+            Part6(args);
         }
 
         private static void SayHello() //"Keep functions to about 10 lines of code per function
@@ -424,36 +424,36 @@ namespace BanasTutorial
         private static void Part5(string[] args)
         {
 
-            //Structs
-            Rectangle rect1;
-            rect1.length = 200;
-            rect1.width = 50;
-            Console.WriteLine("Area of rect1: {0}", rect1.Area());
-            Rectangle rect2 = new Rectangle(75, 100);
-            rect2 = rect1;
-            rect1.length = 33;  //proves its not a reference, but a value
-            Console.WriteLine("rect2.length: {0}", rect2.length);
+            ////Structs
+            //Rectangle rect1;
+            //rect1.length = 200;
+            //rect1.width = 50;
+            //Console.WriteLine("Area of rect1: {0}", rect1.Area());
+            //Rectangle rect2 = new Rectangle(75, 100);
+            //rect2 = rect1;
+            //rect1.length = 33;  //proves its not a reference, but a value
+            //Console.WriteLine("rect2.length: {0}", rect2.length);
 
-            //OOP classes are structs that can be inherited from
-            Animal Fox = new Animal() { sound = "papapapapapow", name = "Fox" };
-            Console.WriteLine("# of animals: {0}", Animal.GetNumAnimals());
-            Fox.MakeSound();
+            ////OOP classes are structs that can be inherited from
+            //Animal Fox = new Animal() { sound = "papapapapapow", name = "Fox" };
+            //Console.WriteLine("# of animals: {0}", Animal.GetNumAnimals());
+            //Fox.MakeSound();
 
-            //Static Classes
-            Console.WriteLine("Area of Rectangle: {0}", ShapeMath.GetArea("rectangle", 5,6));
+            ////Static Classes
+            //Console.WriteLine("Area of Rectangle: {0}", ShapeMath.GetArea("rectangle", 5,6));
 
-            //nullable types
-            int? randNum = null;
-            if(randNum == null)
-            {
-                Console.WriteLine("randNum is Null");
-            }
-            if(!randNum.HasValue)
-            {
-                Console.WriteLine("randNum is Null");
-            }
+            ////nullable types
+            //int? randNum = null;
+            //if(randNum == null)
+            //{
+            //    Console.WriteLine("randNum is Null");
+            //}
+            //if(!randNum.HasValue)
+            //{
+            //    Console.WriteLine("randNum is Null");
+            //}
 
-        }
+        } //Continued in ShapeMath and Animal
         struct Rectangle
         {
             public double length;
@@ -471,5 +471,23 @@ namespace BanasTutorial
             }
         }
 
+
+        private static void Part6(string[] args)
+        {
+            Animal cat = new Animal();
+
+            cat.SetName("Whiskers");
+            cat.Sound = "Meow";
+
+            Console.WriteLine("the cat is named {0} and says {1}", cat.GetName(), cat.Sound);
+
+            cat.Owner = "Derek";
+            Console.WriteLine("{0} owner is {1}", cat.GetName(), cat.Owner);
+            Console.WriteLine("{0} shelter id is {1}", cat.GetName(), cat.idNum);
+
+            Animal fox = new Animal("Oscar", "Papapapapapow");
+
+            Console.WriteLine("# of animals : {0}", Animal.numOfAnimals);
+        }
     }
 }
