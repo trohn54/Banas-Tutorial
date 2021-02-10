@@ -13,7 +13,7 @@ namespace BanasTutorial
     {
         static void Main(string[] args)
         {
-            Part7(args);
+            Part8(args);
         }
 
         private static void SayHello() //"Keep functions to about 10 lines of code per function
@@ -538,5 +538,13 @@ namespace BanasTutorial
             spot.MakeSound(); //
             
         } //Continued in Animal and Dog
+
+        private static void Part8(string[] args)
+        {
+            Warrior maximus = new Warrior("Maximus", 1000, 120, 40);
+            Warrior bob = new Warrior("Bob", 1000, 120, 40);
+
+            Battle.StartFight(maximus, bob);
+        } //continued in Battle and Warrior
     }
 }
