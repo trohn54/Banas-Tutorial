@@ -13,7 +13,7 @@ namespace BanasTutorial
     {
         static void Main(string[] args)
         {
-            Part8(args);
+            Part9(args);
         }
 
         private static void SayHello() //"Keep functions to about 10 lines of code per function
@@ -455,22 +455,22 @@ namespace BanasTutorial
             //}
 
         } //Continued in ShapeMath and Animal
-        struct Rectangle
-        {
-            public double length;
-            public double width;
+        //struct Rectangle
+        //{
+        //    public double length;
+        //    public double width;
 
-            public Rectangle(double l = 1, double w = 1)
-            {
-                length = l;
-                width = w;
-            }
+        //    public Rectangle(double l = 1, double w = 1)
+        //    {
+        //        length = l;
+        //        width = w;
+        //    }
 
-            public double Area()
-            {
-                return length * width;
-            }
-        }
+        //    public double Area()
+        //    {
+        //        return length * width;
+        //    }
+        //}
 
 
         private static void Part6(string[] args)
@@ -546,5 +546,34 @@ namespace BanasTutorial
 
             Battle.StartFight(maximus, bob);
         } //continued in Battle and Warrior
+
+        private static void Part9(string[] args)
+        {
+            Shape[] shapes = { new Circle(5), new Rectangle(4, 5)};
+
+            foreach(Shape s in shapes)
+            {
+                s.GetInfo();
+                Console.WriteLine("{0} area: {1:f2}", s.Name, s.Area());
+
+                Circle testCircle = s as Circle;
+                if(testCircle == null)
+                {
+                    Console.WriteLine("This isn't a circle");
+                }
+
+                if(s is Circle)
+                {
+                    Console.WriteLine("This isn't a rectangle");
+                }
+
+                Console.WriteLine();
+
+                object circ1 = new Circle(4);
+                Circle circ2 = (Circle)circ1;
+
+                Console.WriteLine("The {0} area is {1:f2}", circ2.Name, circ2.Area());
+            }
+        }
     }
 }
