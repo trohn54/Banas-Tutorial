@@ -13,7 +13,7 @@ namespace BanasTutorial
     {
         static void Main(string[] args)
         {
-            Part9(args);
+            Part10(args);
         }
 
         private static void SayHello() //"Keep functions to about 10 lines of code per function
@@ -420,8 +420,6 @@ namespace BanasTutorial
         {
             Console.WriteLine("The car was painted {0} with the code {1}", carColor, (int)carColor);
         }
-
-
         private static void Part5(string[] args)
         {
 
@@ -471,8 +469,6 @@ namespace BanasTutorial
         //        return length * width;
         //    }
         //}
-
-
         private static void Part6(string[] args)
         {
             //Animal cat = new Animal();
@@ -574,6 +570,26 @@ namespace BanasTutorial
 
                 Console.WriteLine("The {0} area is {1:f2}", circ2.Name, circ2.Area());
             }
+        }
+
+        private static void Part10(string[] args)
+        {
+            Vehicle buick = new Vehicle("Buick", 4, 65);
+
+            if(buick is IDrivable)
+            {
+                buick.Move();
+                buick.Stop();
+            }
+            else
+            {
+                Console.WriteLine("Not Drivable");
+            }
+
+            IElectronicDevice TV = TVRemote.GetDevice();
+            PowerButton powerButton = new PowerButton(TV);
+            powerButton.Execute();
+            powerButton.Undo();
         }
     }
 }
