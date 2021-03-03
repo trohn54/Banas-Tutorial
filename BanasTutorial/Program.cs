@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,11 @@ using System.Globalization;
 
 namespace BanasTutorial
 {
-
     class Program
     {
         static void Main(string[] args)
         {
-            Part10(args);
+            Part11(args);
         }
 
         private static void SayHello() //"Keep functions to about 10 lines of code per function
@@ -532,7 +532,7 @@ namespace BanasTutorial
 
             monke.MakeSound();
             spot.MakeSound(); //
-            
+
         } //Continued in Animal and Dog
 
         private static void Part8(string[] args)
@@ -545,20 +545,20 @@ namespace BanasTutorial
 
         private static void Part9(string[] args)
         {
-            Shape[] shapes = { new Circle(5), new Rectangle(4, 5)};
+            Shape[] shapes = { new Circle(5), new Rectangle(4, 5) };
 
-            foreach(Shape s in shapes)
+            foreach (Shape s in shapes)
             {
                 s.GetInfo();
                 Console.WriteLine("{0} area: {1:f2}", s.Name, s.Area());
 
                 Circle testCircle = s as Circle;
-                if(testCircle == null)
+                if (testCircle == null)
                 {
                     Console.WriteLine("This isn't a circle");
                 }
 
-                if(s is Circle)
+                if (s is Circle)
                 {
                     Console.WriteLine("This isn't a rectangle");
                 }
@@ -576,7 +576,7 @@ namespace BanasTutorial
         {
             Vehicle buick = new Vehicle("Buick", 4, 65);
 
-            if(buick is IDrivable)
+            if (buick is IDrivable)
             {
                 buick.Move();
                 buick.Stop();
@@ -590,6 +590,121 @@ namespace BanasTutorial
             PowerButton powerButton = new PowerButton(TV);
             powerButton.Execute();
             powerButton.Undo();
+        }
+
+        private static void Part11(string[] args)
+        {
+            #region ArrayList Code
+
+            ArrayList aList = new ArrayList();
+            aList.Add("Bob");
+            aList.Add(40);
+
+            Console.WriteLine("Count: {0}", aList.Count);
+
+            Console.WriteLine("Count: {0}", aList.Capacity);
+
+            ArrayList aList2 = new ArrayList();
+
+            aList.AddRange(new object[] { "Mike", "Sally", "egg" });
+
+            aList.AddRange(aList2);
+
+            aList2.Sort();
+
+            //aList2.Reverse();
+            //aList2.Insert(1, "June");
+
+            ArrayList range = aList.GetRange(0, 2);
+
+            foreach (object o in range)
+            {
+                Console.WriteLine(o);
+            }
+
+            //aList.RemoveAt(0);
+            //aList.RemoveRange(0, 1);
+
+            Console.WriteLine($"Turkey Index: {aList2.IndexOf("Turkey", 0)}");
+
+            string[] myArray = (string[])aList2.ToArray(typeof(string)); //convert arraylist into an array
+
+            string[] customers = { "Bob", "Sally", "Sue" }; //convert an array into an arraylist
+            ArrayList custArrayList = new ArrayList();
+            custArrayList.AddRange(customers);
+
+            foreach (string s in custArrayList)
+            {
+                Console.WriteLine(s);
+            }
+            #endregion
+            #region Dictionaries
+            Dictionary<string, string> superheroes = new Dictionary<string, string>();
+
+            superheroes.Add("Clark Kent", "Superman");
+            superheroes.Add("Bruce Wayne", "Batman");
+            superheroes.Add("Barry Allen", "The Flash");
+
+            superheroes.Remove("Barry West");
+            Console.WriteLine($"Count: {superheroes.Count}");
+            Console.WriteLine($"Clark Kent: {superheroes.ContainsKey("Clark Kent")}");
+
+            superheroes.TryGetValue("Clark Kent", out string test);
+            Console.WriteLine($"Clark Kent: {test}");
+
+            foreach (KeyValuePair<string, string> item in superheroes)
+            {
+                Console.WriteLine("{0}: {1}", item.Key, item.Value);
+            }
+
+            superheroes.Clear();
+            #endregion
+            #region Queue
+            Queue queue = new Queue();
+
+            queue.Enqueue(1);
+            queue.Enqueue(2);
+            queue.Enqueue(3);
+
+            Console.WriteLine("1 in Queue: {0}", queue.Contains(1));
+            Console.WriteLine("Remove 1: {0}", queue.Dequeue());
+            Console.WriteLine("Peek 2: {0}", queue.Peek());
+
+            object[] numArray = queue.ToArray();
+
+            Console.WriteLine(string.Join(", ", numArray));
+
+            //queue.Clear();
+
+            foreach (object o in queue)
+            {
+                Console.WriteLine($"Queue: {o}");
+            }
+            #endregion
+            #region Stack
+            Stack stack = new Stack();
+
+            stack.Push(1);
+            stack.Push(2);
+            stack.Push(3);
+
+            Console.WriteLine($"Peek 1: {stack.Peek()}");
+
+            Console.WriteLine($"Pop 1: {0}", stack.Pop());
+
+            Console.WriteLine("contains 1: {0}", stack.Contains(1));
+
+            object[] numArray2 = stack.ToArray();
+
+            Console.WriteLine(string.Join(", ", numArray2));
+
+            //stack.Clear();
+
+            foreach(object o in stack)
+            {
+                Console.WriteLine($"Stack: {o}");
+            }
+            #endregion
         }
     }
 }
