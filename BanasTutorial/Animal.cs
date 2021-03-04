@@ -123,79 +123,93 @@ namespace BanasTutorial
         //}
 
         //PART 6
-        private string name;
-        protected string sound;
+    //    private string name;
+    //    protected string sound;
 
-        protected AnimalIDInfo animalIDInfo = new AnimalIDInfo();
-        public void SetAnimalIDInfo(int idNum, string owner)
-        {
-            animalIDInfo.IDNum = idNum;
-            animalIDInfo.Owner = owner;
-        }
+    //    protected AnimalIDInfo animalIDInfo = new AnimalIDInfo();
+    //    public void SetAnimalIDInfo(int idNum, string owner)
+    //    {
+    //        animalIDInfo.IDNum = idNum;
+    //        animalIDInfo.Owner = owner;
+    //    }
 
-        public void GetAnimalIDInfo()
-        {
-            Console.WriteLine($"{Name} has the ID of {animalIDInfo.IDNum} and is owned by {animalIDInfo.Owner}");
-        }
+    //    public void GetAnimalIDInfo()
+    //    {
+    //        Console.WriteLine($"{Name} has the ID of {animalIDInfo.IDNum} and is owned by {animalIDInfo.Owner}");
+    //    }
 
-        public virtual void MakeSound()
-        {
-            Console.WriteLine($"{Name} says {Sound}");
-        }
+    //    public virtual void MakeSound()
+    //    {
+    //        Console.WriteLine($"{Name} says {Sound}");
+    //    }
 
-        public Animal()
-            : this("No Name", "No Sound") { }
+    //    public Animal()
+    //        : this("No Name", "No Sound") { }
 
-        public Animal(string name)
-            : this(name, "No Sound") { }
+    //    public Animal(string name)
+    //        : this(name, "No Sound") { }
 
-        public Animal(string name, string sound)
+    //    public Animal(string name, string sound)
+    //    {
+    //        Name = name;
+    //        Sound = sound;
+    //    }
+
+    //    public string Name
+    //    {
+    //        get { return name; }
+    //        set
+    //        {
+    //            if (!value.Any(char.IsDigit))
+    //            {
+    //                name = "No Name";
+    //            }
+    //            name = value;
+    //        }
+    //    }
+    //    public string Sound
+    //    {
+    //        get { return sound; }
+    //        set
+    //        {
+    //            if (value.Length > 10)
+    //            {
+    //                sound = "No Sound";
+    //            }
+    //            sound = value;
+    //        }
+    //    }
+
+    //    public class AnimalHealth
+    //    {
+    //        public bool HealthyWeight(double height, double weight)
+    //        {
+    //            double calc = height / weight;
+
+    //            if((calc >= .18) &&(calc <= .27))
+    //            {
+    //                return true;
+    //            }
+    //            else
+    //            {
+    //                return false;
+    //            }
+    //        }
+    //    }
+        //PART 12
+
+        public string Name { get; set; }
+        public Animal(string name = "No name")
         {
             Name = name;
-            Sound = sound;
         }
 
-        public string Name
+        //Any time you need many overloaded methods that differ only by their parameters, a generic method is normally a good solution
+        public static void GetSum<T>(ref T num1, ref T num2)
         {
-            get { return name; }
-            set
-            {
-                if (!value.Any(char.IsDigit))
-                {
-                    name = "No Name";
-                }
-                name = value;
-            }
+            double dblX = Convert.ToDouble(num1);
+            double dblY = Convert.ToDouble(num2);
+            Console.WriteLine($"{dblX} + {dblY} = {dblX+dblY}");
         }
-        public string Sound
-        {
-            get { return sound; }
-            set
-            {
-                if (value.Length > 10)
-                {
-                    sound = "No Sound";
-                }
-                sound = value;
-            }
-        }
-
-        public class AnimalHealth
-        {
-            public bool HealthyWeight(double height, double weight)
-            {
-                double calc = height / weight;
-
-                if((calc >= .18) &&(calc <= .27))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-
     }
 }

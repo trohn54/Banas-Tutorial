@@ -13,7 +13,7 @@ namespace BanasTutorial
     {
         static void Main(string[] args)
         {
-            Part11(args);
+            Part12(args);
         }
 
         private static void SayHello() //"Keep functions to about 10 lines of code per function
@@ -490,48 +490,48 @@ namespace BanasTutorial
 
         private static void Part7(string[] args)
         {
-            Animal whiskers = new Animal()
-            {
-                Name = "Whiskers",
-                Sound = "Prrrr"
-            };
-            Dog snickers = new Dog()
-            {
-                Name = "Snickers",
-                Sound = "grrr",
-                Sound2 = "Aroooo"
-            };
+            //Animal whiskers = new Animal()
+            //{
+            //    Name = "Whiskers",
+            //    Sound = "Prrrr"
+            //};
+            //Dog snickers = new Dog()
+            //{
+            //    Name = "Snickers",
+            //    Sound = "grrr",
+            //    Sound2 = "Aroooo"
+            //};
 
-            snickers.Sound = "Woof";
-            whiskers.MakeSound();
-            snickers.MakeSound();
+            //snickers.Sound = "Woof";
+            //whiskers.MakeSound();
+            //snickers.MakeSound();
 
-            whiskers.SetAnimalIDInfo(12345, "Bobby Brown");
-            snickers.SetAnimalIDInfo(545454, "Tommy Rohn");
+            //whiskers.SetAnimalIDInfo(12345, "Bobby Brown");
+            //snickers.SetAnimalIDInfo(545454, "Tommy Rohn");
 
-            whiskers.GetAnimalIDInfo();
-            snickers.GetAnimalIDInfo();
+            //whiskers.GetAnimalIDInfo();
+            //snickers.GetAnimalIDInfo();
 
-            Animal.AnimalHealth getHealth = new Animal.AnimalHealth();
+            //Animal.AnimalHealth getHealth = new Animal.AnimalHealth();
 
-            Console.WriteLine("My animal is healthy: {0}", getHealth.HealthyWeight(11, 46));
-            Console.WriteLine("My animal is healthy: {0}", getHealth.HealthyWeight(11, 146));
+            //Console.WriteLine("My animal is healthy: {0}", getHealth.HealthyWeight(11, 46));
+            //Console.WriteLine("My animal is healthy: {0}", getHealth.HealthyWeight(11, 146));
 
-            Animal monke = new Animal()
-            {
-                Name = "happy",
-                Sound = "eee"
-            };
+            //Animal monke = new Animal()
+            //{
+            //    Name = "happy",
+            //    Sound = "eee"
+            //};
 
-            Animal spot = new Dog()
-            {
-                Name = "Spot",
-                Sound = "ruf",
-                Sound2 = "grrr"
-            };
+            //Animal spot = new Dog()
+            //{
+            //    Name = "Spot",
+            //    Sound = "ruf",
+            //    Sound2 = "grrr"
+            //};
 
-            monke.MakeSound();
-            spot.MakeSound(); //
+            //monke.MakeSound();
+            //spot.MakeSound(); //
 
         } //Continued in Animal and Dog
 
@@ -705,6 +705,86 @@ namespace BanasTutorial
                 Console.WriteLine($"Stack: {o}");
             }
             #endregion
+        }
+
+        private static void Part12(string[] args) //continued in Animal
+        {
+            List<Animal> animalList = new List<Animal>();
+
+            //List<int> numberList = new List<int>();
+            //numberList.Add(24);
+
+            animalList.Add(new Animal() { Name = "Doug"});
+            animalList.Add(new Animal() { Name = "Paul"});
+            animalList.Add(new Animal() { Name = "Sally"});
+
+            animalList.Insert(1, new Animal() { Name = "Steve" });
+            animalList.RemoveAt(1);
+            Console.WriteLine("Num of amimals: {0}", animalList.Count);
+
+            foreach(Animal a in animalList)
+            {
+                Console.WriteLine(a.Name);
+            }
+
+            // Stack<T>, Queue<T>, Dictonary<TKey, TValue> //putting a T instead of a specific value allows us to manipulate the data still, but are treated generically
+
+            int x = 5, y = 4;
+            Animal.GetSum(ref x, ref y);
+            string strX = "5", strY = "4";
+            Animal.GetSum(ref strX, ref strY);
+
+            Rectangle<int> rec1 = new Rectangle<int>(20,50);
+            Console.WriteLine(rec1.GetArea());
+            
+            Rectangle<float> rec2 = new Rectangle<float>(20f,50f);
+            Console.WriteLine(rec1.GetArea());
+
+            Arithmetic add, sub, addSub;
+
+            add = new Arithmetic(Add);
+            sub = new Arithmetic(Subtract);
+            addSub = add + sub;
+            sub = addSub - add;
+
+            Console.WriteLine($"Add 6& 10");
+            add(6,10);
+            Console.WriteLine($"Add & subtract 10 & 4");
+            addSub(10,4);
+        }
+
+        public struct Rectangle<T>
+        {
+            private T width;
+            private T length;
+
+            public T Width { get { return width; } set { width = value; } }
+            public T Length { get { return length; } set { length = value; } }
+
+            public Rectangle(T w, T l)
+            {
+                width = w;
+                length = l;
+            }
+
+            public string GetArea()
+            {
+                double dblWidth = Convert.ToDouble(Width);
+                double dblLength = Convert.ToDouble(Length);
+                return string.Format($"{dblWidth} * {dblLength} = {dblLength * dblWidth}");
+            }
+        }
+
+        public delegate void Arithmetic(double num1, double num2);
+
+        public static void Add(double num1, double num2)
+        {
+            Console.WriteLine($"{num1} + {num2} = {num2 + num1}");
+        }
+
+        public static void Subtract(double num1, double num2)
+        {
+            Console.WriteLine($"{num1} - {num2} = {num2 - num1}");
         }
     }
 }
