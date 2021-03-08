@@ -198,18 +198,21 @@ namespace BanasTutorial
     //    }
         //PART 12
 
-        public string Name { get; set; }
-        public Animal(string name = "No name")
-        {
-            Name = name;
-        }
+        //public string Name { get; set; }
+        //public Animal(string name = "No name")
+        //{
+        //    Name = name;
+        //}
 
-        //Any time you need many overloaded methods that differ only by their parameters, a generic method is normally a good solution
-        public static void GetSum<T>(ref T num1, ref T num2)
-        {
-            double dblX = Convert.ToDouble(num1);
-            double dblY = Convert.ToDouble(num2);
-            Console.WriteLine($"{dblX} + {dblY} = {dblX+dblY}");
-        }
+        ////Any time you need many overloaded methods that differ only by their parameters, a generic method is normally a good solution
+        //public static void GetSum<T>(ref T num1, ref T num2)
+        //{
+        //    double dblX = Convert.ToDouble(num1);
+        //    double dblY = Convert.ToDouble(num2);
+        //    Console.WriteLine($"{dblX} + {dblY} = {dblX+dblY}");
+        //}
+
+        //PART 14
+
     }
 }

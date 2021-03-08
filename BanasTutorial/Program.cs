@@ -13,7 +13,7 @@ namespace BanasTutorial
     {
         static void Main(string[] args)
         {
-            Part12(args);
+            Part14(args);
         }
 
         private static void SayHello() //"Keep functions to about 10 lines of code per function
@@ -700,7 +700,7 @@ namespace BanasTutorial
 
             //stack.Clear();
 
-            foreach(object o in stack)
+            foreach (object o in stack)
             {
                 Console.WriteLine($"Stack: {o}");
             }
@@ -709,50 +709,49 @@ namespace BanasTutorial
 
         private static void Part12(string[] args) //continued in Animal
         {
-            List<Animal> animalList = new List<Animal>();
+            //List<Animal> animalList = new List<Animal>();
 
-            //List<int> numberList = new List<int>();
-            //numberList.Add(24);
+            ////List<int> numberList = new List<int>();
+            ////numberList.Add(24);
 
-            animalList.Add(new Animal() { Name = "Doug"});
-            animalList.Add(new Animal() { Name = "Paul"});
-            animalList.Add(new Animal() { Name = "Sally"});
+            //animalList.Add(new Animal() { Name = "Doug" });
+            //animalList.Add(new Animal() { Name = "Paul" });
+            //animalList.Add(new Animal() { Name = "Sally" });
 
-            animalList.Insert(1, new Animal() { Name = "Steve" });
-            animalList.RemoveAt(1);
-            Console.WriteLine("Num of amimals: {0}", animalList.Count);
+            //animalList.Insert(1, new Animal() { Name = "Steve" });
+            //animalList.RemoveAt(1);
+            //Console.WriteLine("Num of amimals: {0}", animalList.Count);
 
-            foreach(Animal a in animalList)
-            {
-                Console.WriteLine(a.Name);
-            }
+            //foreach (Animal a in animalList)
+            //{
+            //    Console.WriteLine(a.Name);
+            //}
 
-            // Stack<T>, Queue<T>, Dictonary<TKey, TValue> //putting a T instead of a specific value allows us to manipulate the data still, but are treated generically
+            //// Stack<T>, Queue<T>, Dictonary<TKey, TValue> //putting a T instead of a specific value allows us to manipulate the data still, but are treated generically
 
-            int x = 5, y = 4;
-            Animal.GetSum(ref x, ref y);
-            string strX = "5", strY = "4";
-            Animal.GetSum(ref strX, ref strY);
+            //int x = 5, y = 4;
+            //Animal.GetSum(ref x, ref y);
+            //string strX = "5", strY = "4";
+            //Animal.GetSum(ref strX, ref strY);
 
-            Rectangle<int> rec1 = new Rectangle<int>(20,50);
-            Console.WriteLine(rec1.GetArea());
-            
-            Rectangle<float> rec2 = new Rectangle<float>(20f,50f);
-            Console.WriteLine(rec1.GetArea());
+            //Rectangle<int> rec1 = new Rectangle<int>(20, 50);
+            //Console.WriteLine(rec1.GetArea());
 
-            Arithmetic add, sub, addSub;
+            //Rectangle<float> rec2 = new Rectangle<float>(20f, 50f);
+            //Console.WriteLine(rec1.GetArea());
 
-            add = new Arithmetic(Add);
-            sub = new Arithmetic(Subtract);
-            addSub = add + sub;
-            sub = addSub - add;
+            //Arithmetic add, sub, addSub;
 
-            Console.WriteLine($"Add 6& 10");
-            add(6,10);
-            Console.WriteLine($"Add & subtract 10 & 4");
-            addSub(10,4);
+            //add = new Arithmetic(Add);
+            //sub = new Arithmetic(Subtract);
+            //addSub = add + sub;
+            //sub = addSub - add;
+
+            //Console.WriteLine($"Add 6& 10");
+            //add(6, 10);
+            //Console.WriteLine($"Add & subtract 10 & 4");
+            //addSub(10, 4);
         }
-
         public struct Rectangle<T>
         {
             private T width;
@@ -774,17 +773,112 @@ namespace BanasTutorial
                 return string.Format($"{dblWidth} * {dblLength} = {dblLength * dblWidth}");
             }
         }
-
         public delegate void Arithmetic(double num1, double num2);
-
         public static void Add(double num1, double num2)
         {
             Console.WriteLine($"{num1} + {num2} = {num2 + num1}");
         }
-
         public static void Subtract(double num1, double num2)
         {
             Console.WriteLine($"{num1} - {num2} = {num2 - num1}");
+        }
+
+        private static void Part13(string[] args)
+        {
+            #region Lambdas
+            //lambdas let you use anonymous methods that define the input parameters on the left and the code to execute on the right
+            doubleIt dblIt = x => x * 2;
+            Console.WriteLine($"5 * 2 = {dblIt(5)}");
+
+            List<int> numList = new List<int>() { 1, 2, 3, 4 };
+
+            var evenList = numList.Where(a => a % 2 == 0).ToList();
+
+            foreach (var j in evenList)
+            {
+                Console.WriteLine(j);
+            }
+
+            var rangeList = numList.Where(x => (x > 2) && (x < 9));
+            foreach (var j in rangeList)
+            {
+                Console.WriteLine(j);
+            }
+
+            List<int> flipList = new List<int>();
+
+            int i = 0;
+            Random rnd = new Random();
+            while (i < 100)
+            {
+                flipList.Add(rnd.Next(1, 3));
+                i++;
+            }
+
+            Console.WriteLine("Heads: {0}", flipList.Where(a => a == 1).ToList().Count());
+
+            var nameList = new List<string> { "Bob", "Bobert" };
+
+            var sNameList = nameList.Where(x => x.StartsWith("B"));
+
+            foreach (var m in sNameList)
+            {
+                Console.WriteLine(m);
+            }
+            #endregion
+
+            #region select
+            //select allows us to execute a function on each item in a list
+            var oneToTen = new List<int>();
+            oneToTen.AddRange(Enumerable.Range(1, 10)); //sets limits on the list
+
+            var squares = oneToTen.Select(x => x * x); //puts all of oneToTen into squares once modified by the function
+
+            foreach (var l in squares)
+            {
+                Console.WriteLine(l);
+            }
+            #endregion
+
+            #region Zip
+            //add values from both lists together
+            var listOne = new List<int>(new int[] { 1, 3, 4 });
+            var listTwo = new List<int>(new int[] { 4, 6, 8 });
+
+            var sumList = listOne.Zip(listTwo, (x, y) => x + y).ToList();
+
+            foreach (var n in sumList)
+            {
+                Console.WriteLine(n);
+            }
+            #endregion
+
+            #region aggregate
+            //performs operation on each value of a list and then carries those results forward
+            var numList2 = new List<int>() { 1, 2, 3, 4, 5 };
+
+            Console.WriteLine("sum: {0}", numList2.Aggregate((a, b) => a + b));
+            #endregion
+
+            #region average
+            var numList3 = new List<int>() { 1, 2, 3, 4, 5, 3 };
+
+            Console.WriteLine("Avg: {0}", numList3.AsQueryable().Average());
+            #endregion
+
+            #region all, any, distinct, accept
+            Console.WriteLine("all values greater than three: {0}", numList3.All(x=>x>3));
+            Console.WriteLine("any values greater than three: {0}", numList3.Any(x=>x>3));
+            Console.WriteLine("Distinct: {0}", string.Join(", ", numList3.Distinct())); //in first list
+            Console.WriteLine("Except: {0}", string.Join(", ", numList3.Except(numList2))); //not in second list
+            Console.WriteLine("Except: {0}", string.Join(", ", numList3.Intersect(numList2))); //in both lists
+            #endregion
+        }
+        delegate double doubleIt(double val);
+
+        private static void Part14(string[] args)
+        {
+
         }
     }
 }
