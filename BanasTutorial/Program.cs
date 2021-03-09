@@ -867,8 +867,8 @@ namespace BanasTutorial
             #endregion
 
             #region all, any, distinct, accept
-            Console.WriteLine("all values greater than three: {0}", numList3.All(x=>x>3));
-            Console.WriteLine("any values greater than three: {0}", numList3.Any(x=>x>3));
+            Console.WriteLine("all values greater than three: {0}", numList3.All(x => x > 3));
+            Console.WriteLine("any values greater than three: {0}", numList3.Any(x => x > 3));
             Console.WriteLine("Distinct: {0}", string.Join(", ", numList3.Distinct())); //in first list
             Console.WriteLine("Except: {0}", string.Join(", ", numList3.Except(numList2))); //not in second list
             Console.WriteLine("Except: {0}", string.Join(", ", numList3.Intersect(numList2))); //in both lists
@@ -878,7 +878,41 @@ namespace BanasTutorial
 
         private static void Part14(string[] args)
         {
+            AnimalFarm myAnimals = new AnimalFarm();
+            myAnimals[0] = new Animal("Silbur");
+            myAnimals[1] = new Animal("bobert");
+            myAnimals[2] = new Animal("danice");
 
+            foreach (Animal i in myAnimals)
+            {
+                Console.WriteLine(i.name);
+            }
+
+            Box box1 = new Box(2, 3, 4);
+            Box box2 = new Box(4, 5, 4);
+            Box box3 = box1 + box2;
+            Console.WriteLine(box3);
+            Console.WriteLine((int)box3);
+
+            Box box4 = (Box)4;
+
+            Console.WriteLine(box4);
+
+            //anonymous type
+            var shopkins = new { Name = "Shopkins", Price = 4.99 };
+
+            Console.WriteLine("{0} costs {1}", shopkins.Name, shopkins.Price);
+
+            var toyArray = new[]
+            {
+                new { Name = "Football", Price = 9.99 },
+                new { Name = "doll", Price = 12.99 }
+            };
+
+            foreach (var item in toyArray)
+            {
+                Console.WriteLine($"{item.Name} costs {item.Price}");
+            }
         }
     }
 }

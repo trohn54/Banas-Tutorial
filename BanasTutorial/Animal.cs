@@ -213,6 +213,11 @@ namespace BanasTutorial
         //}
 
         //PART 14
+        public string name { get; set; }
 
+        public Animal(string name = "No name")
+        {
+            this.name = name;
+        }
     }
 }
