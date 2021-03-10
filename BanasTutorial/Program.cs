@@ -13,7 +13,7 @@ namespace BanasTutorial
     {
         static void Main(string[] args)
         {
-            Part14(args);
+            Part15(args);
         }
 
         private static void SayHello() //"Keep functions to about 10 lines of code per function
@@ -883,10 +883,10 @@ namespace BanasTutorial
             myAnimals[1] = new Animal("bobert");
             myAnimals[2] = new Animal("danice");
 
-            foreach (Animal i in myAnimals)
-            {
-                Console.WriteLine(i.name);
-            }
+            //foreach (Animal i in myAnimals)
+            //{
+            //    Console.WriteLine(i.name);
+            //}
 
             Box box1 = new Box(2, 3, 4);
             Box box2 = new Box(4, 5, 4);
@@ -913,6 +913,213 @@ namespace BanasTutorial
             {
                 Console.WriteLine($"{item.Name} costs {item.Price}");
             }
+        } //continued in animal and box
+
+        private static void Part15(string[] args) //Continued in Owner and Animal
+        {
+            QueryStringArray();
+            QueryIntArray();
+            QueryArrayList();
+            QueryCollection();
+            QueryAnimalData();
         }
+        static void QueryStringArray()
+        {
+            string[] doggos = { "k 9", "Brian Griffin", "Scooby Doo", "Old Yeller", "Rin Tin Tin", "Benji", "Charlie B. Barkin", "Lassie", "Snoopy" };
+
+            //Query example
+            var dogSpaces = from dog in doggos          //from just tells us where the info will be coming from
+                            where dog.Contains(" ")     //The Condition
+                            orderby dog descending      //Define what data is used(in regards to how we are going to order the data)
+                            select dog;                 //Define variable that is checked against this condition
+            //LINQ stands for Language INtegrated Query
+
+            foreach (var i in dogSpaces)
+            {
+                Console.WriteLine(i + "\n");
+            }
+        }
+
+        static int[] QueryIntArray()
+        {
+            int[] nums = { 5, 10, 15, 20, 25, 30, 35 };
+            var get20 = from num in nums
+                        where num > 20
+                        orderby num
+                        select num;
+
+            foreach (var i in get20)
+            {
+                Console.WriteLine(i + "\n");
+            }
+
+            Console.WriteLine($"Get Type: { get20.GetType() }");
+
+            var listGT20 = get20.ToList<int>();
+            var arrayGT20 = get20.ToArray();
+
+            nums[0] = 40;
+
+            foreach (var i in get20)
+            {
+                Console.WriteLine(i + "\n");
+            }
+            return arrayGT20;
+        }
+
+        static void QueryArrayList()
+        {
+            ArrayList famAnimals = new ArrayList()
+            {
+                 new Animal
+                 {
+                     Name = "Heidi",
+                     Height = .8,
+                     Weight = 18
+                 },
+
+                new Animal
+                {
+                    Name = "Shrek",
+                    Height = 4,
+                    Weight = 130
+                },
+
+                new Animal
+                {
+                    Name = "Congo",
+                    Height = 3.8,
+                    Weight = 90
+                }
+            };
+
+            var famAnimalEnum = famAnimals.OfType<Animal>();
+            var smAnimals = from animal in famAnimalEnum
+                            where animal.Weight <= 90
+                            orderby animal.Name
+                            select animal;
+
+            foreach (Animal a in smAnimals)
+            {
+                Console.WriteLine("{0} weighs {1}\n", a.Name, a.Weight);
+            }
+        }
+
+        static void QueryCollection()
+        {
+            var animalList = new List<Animal>()
+            {
+                new Animal{Name = "German Shepherd",
+                Height = 25,
+                Weight = 77},
+                new Animal{Name = "Chihuahua",
+                Height = 7,
+                Weight = 4.4},
+                new Animal{Name = "Saint Bernard",
+                Height = 30,
+                Weight = 200}
+            };
+
+            var bigDogs = from a in animalList
+                          where (a.Weight > 70) && (a.Height > 25)
+                          orderby a.Name
+                          select a;
+
+            foreach (var dog in bigDogs)
+            {
+                Console.WriteLine("{0} weighs {1}\n", dog.Name, dog.Weight);
+            }            
+        }
+
+        static void QueryAnimalData()
+        {
+            Animal[] animals = new[]
+            {
+                new Animal{Name = "German Shepherd",
+                Height = 25,
+                Weight = 77,
+                AnimalID = 1},
+                new Animal{Name = "Chihuahua",
+                Height = 7,
+                Weight = 4.4,
+                AnimalID = 2},
+                new Animal{Name = "Saint Bernard",
+                Height = 30,
+                Weight = 200,
+                AnimalID = 3},
+                new Animal{Name = "Pug",
+                Height = 12,
+                Weight = 16,
+                AnimalID = 1},
+                new Animal{Name = "Beagle",
+                Height = 15,
+                Weight = 23,
+                AnimalID = 2}
+            };
+
+            Owner[] owners = new[]
+            {
+                new Owner{Name = "Doug Parks",
+                OwnerID = 1},
+                new Owner{Name = "Sally Smith",
+                OwnerID = 2},
+                new Owner{Name = "Paul Brooks",
+                OwnerID = 3}
+            };
+
+            //pull data out, make brand new collection
+            var nameHeight = from a in animals
+                             select new
+                             { 
+                             a.Name, a.Height
+                             };
+
+            Array arrNameHeight = nameHeight.ToArray();
+
+            foreach(var a in arrNameHeight)
+            {
+                Console.WriteLine(a.ToString());
+            }
+
+            //inner join: join info using equal values. stores values
+            var innerJoin = from a in animals
+                            join owner in owners on a.AnimalID equals owner.OwnerID
+                            select new 
+                            { 
+                                OwnerName = owner.Name, 
+                                AnimalName = a.Name 
+                            };
+
+            foreach(var i in innerJoin)
+            {
+                Console.WriteLine("{0} owns {1}\n", i.OwnerName, i.AnimalName);
+            }
+
+            //Group join
+            var groupJoin = from owner in owners
+                            orderby owner.OwnerID
+                            join animal in animals
+                            on owner.OwnerID
+                            equals animal.AnimalID
+                            into ownerGroup
+                            select new
+                            {
+                                Owner = owner.Name,
+                                Animals = from owner2 in ownerGroup
+                                          orderby owner2.Name
+                                          select owner2
+                            }; //One of the most complicated queries you're ever gonna see but what it does is gonna be really, really cool
+
+            int totalAnimals;
+            foreach(var ownerGroup in groupJoin)
+            {
+                Console.WriteLine(ownerGroup.Owner);
+                foreach(var a in ownerGroup.Animals)
+                {
+                    Console.WriteLine("* {0}", a.Name);
+                }
+            }
+        }
+
     }
 }
