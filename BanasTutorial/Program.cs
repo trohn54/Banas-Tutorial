@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Numerics;
 using System.Globalization;
@@ -13,8 +14,8 @@ namespace BanasTutorial
     {
         static void Main(string[] args)
         {
-            Part15(args);
-        }
+            Part16(args);
+        }        
 
         private static void SayHello() //"Keep functions to about 10 lines of code per function
         {
@@ -939,7 +940,6 @@ namespace BanasTutorial
                 Console.WriteLine(i + "\n");
             }
         }
-
         static int[] QueryIntArray()
         {
             int[] nums = { 5, 10, 15, 20, 25, 30, 35 };
@@ -966,7 +966,6 @@ namespace BanasTutorial
             }
             return arrayGT20;
         }
-
         static void QueryArrayList()
         {
             ArrayList famAnimals = new ArrayList()
@@ -1004,7 +1003,6 @@ namespace BanasTutorial
                 Console.WriteLine("{0} weighs {1}\n", a.Name, a.Weight);
             }
         }
-
         static void QueryCollection()
         {
             var animalList = new List<Animal>()
@@ -1030,7 +1028,6 @@ namespace BanasTutorial
                 Console.WriteLine("{0} weighs {1}\n", dog.Name, dog.Weight);
             }            
         }
-
         static void QueryAnimalData()
         {
             Animal[] animals = new[]
@@ -1121,5 +1118,109 @@ namespace BanasTutorial
             }
         }
 
+        private static void Part16(string[] args)
+        {
+            //Threading allows you to execute multiple pieces of code that can share resources and data without you corrupting it
+            //you must lock resources until a thread is done, or your data may become corrupted
+            //finally, you have no guarantee when the thread executes
+            #region one thread
+            //Thread t = new Thread(Print1);
+            //t.Start();
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    Console.Write(0);
+            //}
+            #endregion
+            #region sleep
+            //int num = 1;
+            //for(int i = 0; i < 10; i++)
+            //{
+            //    Console.WriteLine(num);
+            //    Thread.Sleep(1000);
+            //    num++;
+            //}
+            //Console.WriteLine("Thread ends");
+            #endregion
+            #region lock
+            //BankAcct acct = new BankAcct(10);
+            //Thread[] threads = new Thread[15];
+            //Thread.CurrentThread.Name = "main";
+            //for(int i = 0; i < 15;i++)
+            //{
+            //    Thread t = new Thread(new ThreadStart(acct.IssueWithdraw));
+            //    t.Name = i.ToString();
+            //    threads[i] = t;
+            //}
+
+            //for (int i = 0; i < 15; i++)
+            //{
+            //    Console.WriteLine("Thread {0} alive: {1}", threads[i].Name, threads[i].IsAlive);
+            //    threads[i].Start();
+            //    Console.WriteLine("Thread {0} alive: {1}", threads[i].Name, threads[i].IsAlive);
+
+            //}
+
+            //Console.WriteLine("Current Priority: {0}", Thread.CurrentThread.Priority); //Playing around w priority is D A N G E R O U S
+            //Console.WriteLine("Thread {0} ending", Thread.CurrentThread.Name);
+            #endregion
+            #region passing data to threads
+            Thread t = new Thread(() => CountTo(10));
+            t.Start();
+            //multiline
+            new Thread(() =>
+            {
+                CountTo(5);
+                CountTo(6);
+            }).Start();
+
+            #endregion
+        }
+        static void Print1()
+        {
+            for(int i = 0; i < 1000; i++)
+            {
+                Console.Write(1);
+            }
+        }
+        static void CountTo(int maxNum)
+        {
+            for (int i = 0; i < maxNum; i++)
+            {
+                Console.WriteLine(i); 
+            }
+        }
+    }
+
+    class BankAcct
+    {
+        private object acctLock = new object();
+        double balance { get; set; }
+        public BankAcct(double bal)
+        {
+            balance = bal;
+        }
+        public double Withdraw(double amt)
+        {
+            if((balance - amt) < 0)
+            {
+                Console.WriteLine("Sorry, {0} in account.", balance);
+            }
+
+            lock(acctLock)
+            {
+                if(balance >= amt)
+                {
+                    Console.WriteLine("Removed {0}: {1} in account", amt, balance - amt);
+                    balance -= amt;
+                }
+                return balance;
+            }
+
+        }
+        //by default, you can only point to methods without arguments and methods that return nothing/void. heres how u do it
+        public void IssueWithdraw()
+        {
+            Withdraw(1);
+        }
     }
 }
