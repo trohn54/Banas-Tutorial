@@ -15,7 +15,7 @@ namespace BanasTutorial
     {
         static void Main(string[] args)
         {
-            Part17(args);
+            Part18(args);
         }        
 
         private static void SayHello() //"Keep functions to about 10 lines of code per function
@@ -1278,6 +1278,11 @@ namespace BanasTutorial
             Console.WriteLine(br.ReadDouble());
             br.Close();
             #endregion
+        }
+
+        private static void Part18(string[] args)
+        {
+
         }
     }
 
