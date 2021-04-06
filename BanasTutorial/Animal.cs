@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 //Used for part 5
 namespace BanasTutorial
 {
+    [Serializable()]
     //calling this "sealed" will keep it from inheriting
-    class Animal
+    public class Animal : ISerializable
     {
         ////PART 5
         //public string name;
@@ -221,21 +224,57 @@ namespace BanasTutorial
         //}
 
         //PART 15
+        //public string Name { get; set; }
+        //public double Weight { get; set; }
+        //public double Height { get; set; }
+        //public int AnimalID { get; set; }
+
+        //public Animal(string name = "no name", double weight = 0, double height = 0)
+        //{
+        //    this.Name = name;
+        //    this.Weight = weight;
+        //    this.Height = height;
+        //}
+
+        //public override string ToString()
+        //{
+        //    return string.Format("{0} weighs {1} lbs and is {2} inches tall.", Name, Weight, Height);
+        //}
+
+        //PART 18
         public string Name { get; set; }
         public double Weight { get; set; }
         public double Height { get; set; }
         public int AnimalID { get; set; }
 
-        public Animal(string name = "no name", double weight = 0, double height = 0)
+        public Animal() { }
+
+        public Animal(string name = "No name", double weight = 0, double height = 0)
         {
-            this.Name = name;
-            this.Weight = weight;
-            this.Height = height;
+            Name = name;
+            Weight = weight;
+            Height = height;
         }
 
         public override string ToString()
         {
-            return string.Format("{0} weighs {1} lbs and is {2} inches tall.", Name, Weight, Height);
+            return string.Format("{0} weighs {1} lbs and is {2} inches tall", Name, Weight, Height);
+        }
+
+        //SerializationInfo holds key value pairs
+        //StreamingContext holds other info
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Name", Name);
+            info.AddValue("Weight", Weight);
+            info.AddValue("Height", Height);
+        }
+
+        public Animal(SerializationInfo info, StreamingContext context)
+        {
+            Name = (string)info.GetValue("Name", typeof(string));
+            Weight = (double)info.GetValue("Weight", typeof(double));
+            Height = (double)info.GetValue("Height", typeof(double));
         }
     }
 }
