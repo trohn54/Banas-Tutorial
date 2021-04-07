@@ -2,18 +2,18 @@
 
 
 winexe
-VB
-.vb
+C#
+.cs
 C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\obj\Debug\
 BanasWPF
 none
 false
-
-C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\Application.xaml
+DEBUG;TRACE
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\App.xaml
 11151548125
 
-7-1731700190
-111682248113
+6-808784526
+13-1505183044
 MainWindow.xaml;
 
 True
