@@ -23,6 +23,29 @@ namespace BanasWPF
         public MainWindow()
         {
             InitializeComponent();
+
+            this.Title = "Hello World";
+            this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        }
+
+        private void Window_MouseMove(object sender, MouseEventArgs e)
+        {
+            Title = e.GetPosition(this).ToString();
+        }
+
+        private void Button1_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonOpenFile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ButtonSaveFile_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

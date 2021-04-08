@@ -1,0 +1,14 @@
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\bin\Debug\BanasWPF.exe.config
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\bin\Debug\BanasWPF.exe
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\bin\Debug\BanasWPF.pdb
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\obj\Debug\BanasWPF.csprojAssemblyReference.cache
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\obj\Debug\MainWindow.g.cs
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\obj\Debug\App.g.cs
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\obj\Debug\BanasWPF_MarkupCompile.cache
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\obj\Debug\BanasWPF_MarkupCompile.lref
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\obj\Debug\MainWindow.baml
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\obj\Debug\BanasWPF.g.resources
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\obj\Debug\BanasWPF.Properties.Resources.resources
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\obj\Debug\BanasWPF.csproj.GenerateResource.cache
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\obj\Debug\BanasWPF.exe
+C:\Programming\C#\BanasTutorial\BanasWPF\BanasWPF\obj\Debug\BanasWPF.pdb

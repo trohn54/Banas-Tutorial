@@ -4,9 +4,25 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BanasWPF"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize" SizeToContent="WidthAndHeight" Topmost="False" WindowState="Normal" MouseMove="Window_MouseMove">
+    <Window.Resources>
+        <sys:String x:Key="strHelloAgain">Whats up</sys:String>
+
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="FontSize" Value="40"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="consolas"/>
+
+        </Style>
+    </Window.Resources>
+    <StackPanel Orientation="Vertical">
+        <TextBlock HorizontalAlignment="Center" TextWrapping="NoWrap" Text="Hello World" VerticalAlignment="Top" FontSize="40"/>
+        <TextBlock Text="{StaticResource strHelloAgain}" FontSize="40" HorizontalAlignment="Center"/>
+        <Button x:Name="Button1" Height="40" Width="260" HorizontalAlignment="Center" Content="Close Window" Click="Button1_Click"/>
+        <Button x:Name="ButtonOpenFile" Height="40" Width="260" HorizontalAlignment="Center" Content="OpenFile" Click="ButtonOpenFile_Click"/>
+        <Button x:Name="ButtonSaveFile" Height="40" Width="260" HorizontalAlignment="Center" Content="SaveFile" Click="ButtonSaveFile_Click"/>
+    </StackPanel>
 </Window>
