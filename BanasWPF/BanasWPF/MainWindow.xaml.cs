@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace BanasWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        string usersName = "";
         public MainWindow()
         {
             InitializeComponent();
@@ -35,17 +37,27 @@ namespace BanasWPF
 
         private void Button1_Click(object sender, RoutedEventArgs e)
         {
-
+            MessageBox.Show("The app is closing");
+            this.Close();
         }
 
         private void ButtonOpenFile_Click(object sender, RoutedEventArgs e)
         {
-
+            OpenFileDialog open = new OpenFileDialog();
+            open.ShowDialog();
         }
 
         private void ButtonSaveFile_Click(object sender, RoutedEventArgs e)
         {
+            SaveFileDialog save = new SaveFileDialog();
+            save.ShowDialog();
+        }
 
+        private void SendButton_Click(object sender, RoutedEventArgs e)
+        {
+            //usersName = UsersName.Text;
+
+            MessageBox.Show("Hello " + usersName);
         }
     }
 }
