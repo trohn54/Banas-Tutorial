@@ -59,5 +59,43 @@ namespace BanasWPF
 
             MessageBox.Show("Hello " + usersName);
         }
+
+        private void menuSave_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog save = new SaveFileDialog();
+            save.ShowDialog();
+        }
+
+        private void menuExit_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void menuOpen_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog open = new OpenFileDialog();
+            open.ShowDialog();
+        }
+
+        private void MenuFontTimes_Click(object sender, RoutedEventArgs e)
+        {
+            menuFontCourier.IsChecked = false;
+            menuFontArial.IsChecked = false;
+            txtBoxDoc.FontFamily = new FontFamily("Times New Roman");
+        }
+
+        private void MenuFontCourier_Click(object sender, RoutedEventArgs e)
+        {
+            menuFontTimes.IsChecked = false;
+            menuFontArial.IsChecked = false;
+            txtBoxDoc.FontFamily = new FontFamily("Courier");
+        }
+
+        private void MenuFontArial_Click(object sender, RoutedEventArgs e)
+        {
+            menuFontCourier.IsChecked = false;
+            menuFontTimes.IsChecked = false;
+            txtBoxDoc.FontFamily = new FontFamily("Arial");
+        }
     }
 }
