@@ -60,18 +60,18 @@ namespace BanasWPF
             MessageBox.Show("Hello " + usersName);
         }
 
-        private void menuSave_Click(object sender, RoutedEventArgs e)
+        private void MenuSave_Click(object sender, RoutedEventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
             save.ShowDialog();
         }
 
-        private void menuExit_Click(object sender, RoutedEventArgs e)
+        private void MenuExit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
-        private void menuOpen_Click(object sender, RoutedEventArgs e)
+        private void MenuOpen_Click(object sender, RoutedEventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
             open.ShowDialog();
@@ -96,6 +96,46 @@ namespace BanasWPF
             menuFontCourier.IsChecked = false;
             menuFontTimes.IsChecked = false;
             txtBoxDoc.FontFamily = new FontFamily("Arial");
+        }
+
+        private bool comboFSClosed = true;
+
+        private void ComboFontSize_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(comboFSClosed)
+            {
+                ChangeTBFontSize();
+                comboFSClosed = true;
+            }
+        }
+
+        private void ComboFontSize_DropDownClosed(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            comboFSClosed = !comboBox.IsDropDownOpen;
+            ChangeTBFontSize();
+        }
+
+        private void ChangeTBFontSize()
+        {
+            string fontSize = ComboFontSize.SelectedItem.ToString();
+            fontSize = fontSize.Substring(fontSize.Length - 2);
+
+            switch(fontSize)
+            {
+                case "10":
+                    txtBoxDoc.FontSize = 10;
+                    break;
+                case "12":
+                    txtBoxDoc.FontSize = 12;
+                    break;
+                case "14":
+                    txtBoxDoc.FontSize = 14;
+                    break;
+                case "16":
+                    txtBoxDoc.FontSize = 16;
+                    break;
+            }
         }
     }
 }

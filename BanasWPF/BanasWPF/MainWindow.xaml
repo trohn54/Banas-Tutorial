@@ -96,12 +96,12 @@
                         <Image Source="./Resources/New.bmp"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem x:Name="menuOpen" Header="_Open" InputGestureText="Ctrl+O" Click="menuOpen_Click">
+                <MenuItem x:Name="menuOpen" Header="_Open" InputGestureText="Ctrl+O" Click="MenuOpen_Click">
                     <MenuItem.Icon>
                         <Image Source="./Resources/Open.bmp"/>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem x:Name="menuSave" Header="_Save" InputGestureText="Ctrl+S" Click="menuSave_Click">
+                <MenuItem x:Name="menuSave" Header="_Save" InputGestureText="Ctrl+S" Click="MenuSave_Click">
                     <MenuItem.Icon>
                         <Image Source="./Resources/Save.bmp"/>
                     </MenuItem.Icon>
@@ -121,6 +121,36 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <TextBox x:Name="txtBoxDoc" Height="290" Width="500"/>
+
+        <ToolBarTray DockPanel.Dock="Top">
+            <ToolBar>
+                <Button x:Name="tbOpen" ToolTip="Open File" Click="MenuOpen_Click">
+                    <Image Source="./Resources/Open.bmp"/>
+                </Button>
+                <Button x:Name="tbSave" ToolTip="Save File" Click="MenuSave_Click">
+                    <Image Source="./Resources/Save.bmp"/>
+                </Button>
+                <Button x:Name="tbCut" Command="ApplicationCommands.Cut">
+                    <Image Source="./Resources/Cut.bmp"/>
+                </Button>
+                <Button x:Name="tbCopy" Command="ApplicationCommands.Copy">
+                    <Image Source="./Resources/Copy.bmp"/>
+                </Button>
+                <Button x:Name="tbPaste" Command="ApplicationCommands.Paste">
+                    <Image Source="./Resources/Paste.bmp"/>
+                </Button>
+                <Separator/>
+                <Label>Font Size:</Label>
+                <ComboBox x:Name="ComboFontSize" SelectionChanged="ComboFontSize_SelectionChanged" DropDownClosed="ComboFontSize_DropDownClosed">
+                    <ComboBoxItem>10</ComboBoxItem>
+                    <ComboBoxItem IsSelected="True">12</ComboBoxItem>
+                    <ComboBoxItem>14</ComboBoxItem>
+                    <ComboBoxItem>16</ComboBoxItem>
+                </ComboBox>
+            </ToolBar>        
+        </ToolBarTray>
+
+        <TextBox x:Name="txtBoxDoc" Height="290" Width="500"/>      
+        
     </DockPanel>
 </Window>
